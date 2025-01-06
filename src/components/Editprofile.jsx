@@ -112,17 +112,7 @@ const Editprofile = ({ user }) => {
                     className="input input-bordered w-full max-w-xs"
                   />
                 </label>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">About</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={about}
-                    onChange={(e) => setAbout(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
+
                 <label className="form-control w-full max-w-xs">
                   <div className="label">
                     <span className="label-text">Photo URL</span>
@@ -133,6 +123,16 @@ const Editprofile = ({ user }) => {
                     onChange={(e) => setPhotoUrl(e.target.value)}
                     className="input input-bordered w-full max-w-xs"
                   />
+                </label>
+                <label className="form-control w-full max-w-xs">
+                  <div className="label">
+                    <span className="label-text">About</span>
+                  </div>
+                  <textarea
+                    className="textarea textarea-bordered"
+                    placeholder="Bio"
+                    onChange={(e) => setAbout(e.target.value)}
+                  ></textarea>
                 </label>
               </div>
               <div>
