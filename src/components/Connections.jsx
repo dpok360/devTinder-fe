@@ -46,7 +46,7 @@ const Connections = () => {
                 <tr>
                   <td className="pl-24 py-12 m-10">
                     <p className="flex justify-center font-serif text-xl">
-                      You have currently no request!
+                      You have currently no connections!
                     </p>
                   </td>
                 </tr>
