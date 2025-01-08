@@ -51,7 +51,7 @@ const Editprofile = ({ user }) => {
         <div className="flex justify-center mx-10">
           <div className="card bg-base-300 w-96 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title flex justify-center">Login</h2>
+              <h2 className="card-title flex justify-center">Profile</h2>
               <div className="py-2">
                 <label className="form-control w-full max-w-xs">
                   <div className="label">
