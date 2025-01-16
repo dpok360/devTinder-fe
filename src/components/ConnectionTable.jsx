@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom';
+
 const ConnectionTable = ({ user }) => {
-  const { firstName, lastName, gender, age, skills, about, photoUrl } = user;
+  const { _id, firstName, lastName, gender, age, skills, about, photoUrl } =
+    user;
 
   return (
     <>
@@ -27,9 +30,11 @@ const ConnectionTable = ({ user }) => {
             <span className="badge badge-ghost badge-sm">{about}</span>
           </td>
           <td>{skills.length > 0 ? skills : '----'}</td>
-          {/* <th>
-              <button className="btn btn-ghost btn-xs">details</button>
-              </th> */}
+          <th>
+            <Link to={'/chat/' + _id}>
+              <button className="btn btn-info btn-md">Chat</button>
+            </Link>
+          </th>
         </tr>
       </tbody>
     </>
