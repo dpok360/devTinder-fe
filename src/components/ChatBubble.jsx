@@ -1,6 +1,10 @@
 const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
   const name = message.firstName + ' ' + message.lastName;
 
+  //TODO:show green check when online
+  //TODO: show time stamp for message->last seen 2 hours ago
+  //TODO: limit messages when fetching messages for
+
   return (
     <>
       <div
