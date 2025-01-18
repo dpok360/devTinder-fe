@@ -9,9 +9,15 @@ import { BASE_URL } from '../constants/constants';
 const Chat = () => {
   const { targetUserId } = useParams();
   const user = useSelector((store) => store?.user);
+  const connectedUsers = useSelector((store) => store?.connection) || [];
   const userId = user?._id;
+  const profilePhoto = user?.photoUrl;
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState('');
+
+  const targetedUserphotoUrl = connectedUsers.filter(
+    (target) => target._id === targetUserId
+  )[0]?.photoUrl;
 
   const fetchChatMessages = async () => {
     try {
@@ -75,7 +81,13 @@ const Chat = () => {
       <div className="flex-1 overflow-scroll p-5">
         {/* chat message   */}
         {messages.map((msg, index) => (
-          <ChatBubble key={index} message={msg} user={user} />
+          <ChatBubble
+            key={index}
+            message={msg}
+            user={user}
+            profilePhoto={profilePhoto}
+            targetUserPhoto={targetedUserphotoUrl}
+          />
         ))}
       </div>
       <div className="flex items-center mx-28 p-2 gap-2 w-full ">
