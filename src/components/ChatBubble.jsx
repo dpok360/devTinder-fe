@@ -1,9 +1,17 @@
-const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
+import Status from './Status';
+
+const ChatBubble = ({
+  message,
+  user,
+  profilePhoto,
+  targetUserPhoto,
+  isOnline,
+}) => {
   const name = message.firstName + ' ' + message.lastName;
 
   //TODO:show green check when online
   //TODO: show time stamp for message->last seen 2 hours ago
-  //TODO: limit messages when fetching messages for
+  //TODO: limit messages when fetching messages from db
 
   return (
     <>
@@ -27,10 +35,12 @@ const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
         </div>
         <div className="chat-header">
           {name}
-          <time className="text-xs opacity-50"></time>
+          {/* <time className="text-xs opacity-50"></time> */}
         </div>
-        <div className="chat-bubble">{message.text}</div>
-        {/* <div className="chat-footer opacity-50">Delivered</div> */}
+        <div className="chat-bubble">{message?.text}</div>
+        <div className="chat-footer opacity-50">
+          {/* {isOnline ? <Status status="true" /> : <Status status="false" />} */}
+        </div>
       </div>
     </>
   );
