@@ -18,10 +18,9 @@ const Chat = () => {
   const profilePhoto = user?.photoUrl;
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState('');
-  const [token, setToken] = useState('');
+  //const [token, setToken] = useState('');
   const [isOnline, setIsOnline] = useState(null);
-  const [isActive, setIsActive] = useState(false);
-
+  const [isActive, setIsActive] = useState([]);
   const socketRef = useRef(null);
 
   const targetedUser = connectedUsers.filter(
@@ -59,18 +58,18 @@ const Chat = () => {
     fetchChatMessages();
   }, []);
 
-  useEffect(() => {
-    const res = getJwt();
-    setToken(res);
-  }, [setToken]);
+  // useEffect(() => {
+  //   const res = getJwt();
+  //   setToken(res);
+  // }, [setToken]);
 
   useEffect(() => {
+    const token = getJwt();
     if (!userId) {
       return;
     }
     //on page load,socket connection is made and join chat event is emitted
-    const socket = createSocketConnection(token);
-
+    const socket = createSocketConnection();
     socketRef.current = socket;
     socket.emit('joinChat', {
       firstName: user.firstName,
@@ -78,14 +77,10 @@ const Chat = () => {
       targetUserId,
       token,
     });
-
     //TODO:checks user is active or not
-    socket.on('connect', () => {
-      setIsActive(socket.connected);
-    });
-
-    socket.on('disconnect', () => {
-      setIsActive(socket.connected);
+    socket.emit('userOnline', { userId });
+    socket.on('userStatus', (onlineUsers) => {
+      setIsActive(onlineUsers);
     });
 
     socket.on('messageReceived', ({ firstName, lastName, newMessages }) => {
@@ -94,6 +89,7 @@ const Chat = () => {
         { firstName, lastName, text: newMessages },
       ]);
     });
+    socket.on('disconnect', () => {});
 
     return () => {
       socket.disconnect();
@@ -101,9 +97,7 @@ const Chat = () => {
   }, [userId, targetUserId]);
 
   const sendMessages = () => {
-    //const socket = createSocketConnection(token);
     //send connection status to server
-
     if (!socketRef.current) return;
     socketRef.current.emit('sendMessage', {
       firstName: user.firstName,
@@ -113,6 +107,7 @@ const Chat = () => {
     });
     setNewMessages('');
   };
+  const isUserActive = !!isActive.find((id) => id === targetUserId);
 
   return (
     <div className="w-1/2 m-auto mt-6 border border-cyan-500 rounded-xl h-[80vh] flex flex-col">
@@ -122,12 +117,12 @@ const Chat = () => {
           <p className="text-xl font-serif text-white flex flex-col">
             {targetUserName}
             <span className="text-sm px-2 font-sans">
-              {isActive ? 'online' : 'offline'}
+              {isUserActive ? 'online' : 'offline'}
             </span>
           </p>
 
           <div className="w-20 rounded-full m-2">
-            <Online status={isOnline} />
+            <Online status={isUserActive ? 'online' : 'offline'} />
             <img
               alt="Tailwind CSS chat bubble component"
               src={targetedUserphotoUrl || DEFAULT_USER_URL}
