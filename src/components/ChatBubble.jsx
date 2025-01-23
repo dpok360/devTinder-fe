@@ -1,17 +1,13 @@
+import { DEFAULT_USER_URL } from '../constants/constants';
 import Status from './Status';
 
-const ChatBubble = ({
-  message,
-  user,
-  profilePhoto,
-  targetUserPhoto,
-  isOnline,
-}) => {
+const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
   const name = message.firstName + ' ' + message.lastName;
 
-  //TODO:show green check when online
   //TODO: show time stamp for message->last seen 2 hours ago
   //TODO: limit messages when fetching messages from db
+
+  const targetUserImage = targetUserPhoto || DEFAULT_USER_URL;
 
   return (
     <>
@@ -28,7 +24,7 @@ const ChatBubble = ({
               src={
                 user.firstName === message.firstName
                   ? profilePhoto
-                  : targetUserPhoto
+                  : targetUserImage
               }
             />
           </div>
