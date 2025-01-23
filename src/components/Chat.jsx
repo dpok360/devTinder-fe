@@ -8,6 +8,8 @@ import { BASE_URL, DEFAULT_USER_URL } from '../constants/constants';
 import getJwt from '../utils/getjwt';
 import getOnlineStatus from '../utils/getOnlineStatus';
 import Online from './Online';
+import SendButton from './buttons/SendButton';
+import fetchChatMessages from '../utils/fetchChatMessages';
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -29,26 +31,17 @@ const Chat = () => {
   const targetedUserphotoUrl = targetedUser?.photoUrl;
   const targetUserName = targetedUser?.firstName;
 
-  const fetchChatMessages = async () => {
-    try {
-      if (!targetUserId) return;
-      const chat = await axios.get(BASE_URL + '/chat/' + targetUserId, {
-        withCredentials: true,
-      });
-      const chatMessages = chat?.data?.messages.map((msg) => {
-        return {
-          firstName: msg?.senderId?.firstName,
-          lastName: msg?.senderId?.lastName,
-          text: msg?.text,
-        };
-      });
+  useEffect(() => {
+    const loadMessages = async () => {
+      const chatMessages = await fetchChatMessages(targetUserId);
+      if (!chatMessages) {
+        setMessages([]);
+      }
       setMessages(chatMessages);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+    };
+    loadMessages();
+  }, [targetUserId]);
 
-  //TODO:for online status
   useEffect(() => {
     const isOnline = getOnlineStatus();
     setIsOnline(isOnline);
@@ -57,11 +50,6 @@ const Chat = () => {
   useEffect(() => {
     fetchChatMessages();
   }, []);
-
-  // useEffect(() => {
-  //   const res = getJwt();
-  //   setToken(res);
-  // }, [setToken]);
 
   useEffect(() => {
     const token = getJwt();
@@ -110,7 +98,7 @@ const Chat = () => {
   const isUserActive = !!isActive.find((id) => id === targetUserId);
 
   return (
-    <div className="w-1/2 m-auto mt-6 border border-cyan-500 rounded-xl h-[80vh] flex flex-col">
+    <div className="w-full sm:w-1/2 sm:m-auto sm:mt-6 border border-cyan-500 rounded-xl h-[80vh] flex flex-col">
       <div className="flex w-full border-b border-cyan-600 justify-between">
         <h1 className="p-4 text-2xl">Chat</h1>
         <div className="chat-image avatar flex items-center">
@@ -121,7 +109,7 @@ const Chat = () => {
             </span>
           </p>
 
-          <div className="w-20 rounded-full m-2">
+          <div className="w-10 sm:w-20 rounded-full m-2">
             <Online status={isUserActive ? 'online' : 'offline'} />
             <img
               alt="Tailwind CSS chat bubble component"
@@ -152,9 +140,7 @@ const Chat = () => {
           placeholder="Type here"
           className="input input-bordered input-info w-full max-w-lg"
         />
-        <button onClick={sendMessages} className="btn btn-info btn-md w-20">
-          <img src="../../public/svgs/send.svg" alt="send icon" />
-        </button>
+        <SendButton sendMessages={sendMessages} />
       </div>
     </div>
   );
