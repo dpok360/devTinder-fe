@@ -29,7 +29,12 @@ const NavBar = () => {
       {user && (
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end mx-2 flex">
-            <p className="p-3">Welcome {user.firstName}</p>
+            <p className="p-3 ">
+              Welcome{' '}
+              <span className="text-xl font-serif text-white">
+                {user.firstName}
+              </span>
+            </p>
             <div
               tabIndex={0}
               role="button"

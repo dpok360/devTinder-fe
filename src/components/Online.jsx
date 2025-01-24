@@ -6,7 +6,7 @@ const Online = ({ status }) => {
       viewBox="0 0 24 24"
       width="24px"
       fill={status === 'online' ? 'green' : 'gray'}
-      className="absolute left-16 top-16 z-10"
+      className="absolute left-12 sm:left-16 top-8 sm:top-16 z-10"
     >
       <g>
         <rect fill="none" height="24" width="24" />

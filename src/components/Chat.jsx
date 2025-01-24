@@ -3,7 +3,6 @@ import ChatBubble from './ChatBubble';
 import { useEffect, useRef, useState } from 'react';
 import { createSocketConnection } from '../utils/socket';
 import { useSelector } from 'react-redux';
-import { DEFAULT_USER_URL } from '../constants/constants';
 import getJwt from '../utils/getjwt';
 import getOnlineStatus from '../utils/getOnlineStatus';
 import Online from './Online';
@@ -97,16 +96,14 @@ const Chat = () => {
     setNewMessages('');
   };
   const isUserActive = !!isActive.find((id) => id === targetUserId);
-
-  console.log(photoUrlFromLoaclStorage);
   return (
-    <div className="w-screen sm:w-1/2 sm:m-auto sm:mt-6 border border-cyan-500 sm:rounded-xl h-[80vh] flex flex-col">
+    <div className="w-screen sm:w-1/2 sm:m-auto sm:mt-6 border border-cyan-500 sm:rounded-xl h-[80vh] flex flex-col bg-gray-800">
       <div className="flex w-full border-b border-cyan-600 justify-between">
-        <h1 className="p-4 text-2xl">Chat</h1>
+        <h1 className="p-4 text-md sm:text-2xl">Chat</h1>
         <div className="chat-image avatar flex items-center">
-          <p className="text-xl font-serif text-white flex flex-col">
+          <p className="text-md sm:text-xl font-serif text-white flex flex-col items-center">
             {targetUserName}
-            <span className="text-sm px-2 font-sans">
+            <span className="text-xs sm:text-sm px-2 font-sans">
               {isUserActive ? 'online' : 'offline'}
             </span>
           </p>
@@ -131,7 +128,7 @@ const Chat = () => {
           />
         ))}
       </div>
-      <div className="flex items-center mx-auto sm:mx-28 p-2 gap-2 w-full ">
+      <div className="flex justify-center items-center mx-auto  p-2 gap-2 w-full ">
         <input
           value={newMessages}
           onChange={(e) => {
