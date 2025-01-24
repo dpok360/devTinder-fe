@@ -1,5 +1,4 @@
 import { DEFAULT_USER_URL } from '../constants/constants';
-import Status from './Status';
 
 const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
   const name = message.firstName + ' ' + message.lastName;

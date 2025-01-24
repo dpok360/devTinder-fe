@@ -19,7 +19,6 @@ const Chat = () => {
   const profilePhoto = user?.photoUrl;
   const [messages, setMessages] = useState([]);
   const [newMessages, setNewMessages] = useState('');
-  const [isOnline, setIsOnline] = useState(null);
   const [isActive, setIsActive] = useState([]);
 
   const socketRef = useRef(null);
@@ -40,6 +39,7 @@ const Chat = () => {
     readPhotoUrlFromStorage('targetUserDetails');
   const targetUserDetails = JSON.parse(targetUserFromLoaclStorage);
 
+  //fetch msg from db
   useEffect(() => {
     const loadMessages = async () => {
       const chatMessages = await fetchChatMessages(targetUserId);
@@ -50,11 +50,6 @@ const Chat = () => {
     };
     loadMessages();
   }, [targetUserId]);
-
-  useEffect(() => {
-    const isOnline = getOnlineStatus();
-    setIsOnline(isOnline);
-  }, [setIsOnline]);
 
   useEffect(() => {
     fetchChatMessages();
@@ -95,7 +90,7 @@ const Chat = () => {
     scrollMessageView();
   }, [messages]);
 
-  const sendMessages = () => {
+  const sendMessages = (e) => {
     if (!socketRef.current) return;
     socketRef.current.emit('sendMessage', {
       firstName: user.firstName,
@@ -105,6 +100,12 @@ const Chat = () => {
       newMessages,
     });
     setNewMessages('');
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && newMessages.trim()) {
+      sendMessages();
+    }
   };
   const isUserActive = !!isActive.find((id) => id === targetUserId);
 
@@ -136,7 +137,6 @@ const Chat = () => {
             user={user}
             profilePhoto={profilePhoto}
             targetUserPhoto={targetUserDetails.photoUrl}
-            isOnline={isOnline}
           />
         ))}
         <div ref={messagesEndRef} />
@@ -144,6 +144,7 @@ const Chat = () => {
       <div className="flex justify-center items-center mx-auto  p-2 gap-2 w-full ">
         <input
           value={newMessages}
+          onKeyDown={handleKeyDown}
           onChange={(e) => {
             setNewMessages(e.target.value);
           }}
