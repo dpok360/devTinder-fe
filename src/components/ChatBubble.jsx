@@ -1,7 +1,9 @@
 import { DEFAULT_USER_URL } from '../constants/constants';
+import { format } from 'date-fns';
 
 const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
   const name = message.firstName + ' ' + message.lastName;
+  const { createdAt } = message;
 
   //TODO: show time stamp for message->last seen 2 hours ago
   //TODO: limit messages when fetching messages from db
@@ -29,13 +31,15 @@ const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
           </div>
         </div>
         <div className="chat-header">
-          {name}
-          {/* <time className="text-xs opacity-50"></time> */}
+          {name}{' '}
+          <time className="text-xs opacity-50">
+            {createdAt
+              ? format(new Date(createdAt), 'EEEE/dd/yyyy')
+              : format(new Date(Date.now()), 'EEEE/dd/yyyy')}
+          </time>
         </div>
         <div className="chat-bubble">{message?.text}</div>
-        <div className="chat-footer opacity-50">
-          {/* {isOnline ? <Status status="true" /> : <Status status="false" />} */}
-        </div>
+        <div className="chat-footer opacity-50"></div>
       </div>
     </>
   );

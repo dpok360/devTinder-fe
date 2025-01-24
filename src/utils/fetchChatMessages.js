@@ -13,6 +13,7 @@ const fetchChatMessages = async (targetUserId) => {
         firstName: msg?.senderId?.firstName,
         lastName: msg?.senderId?.lastName,
         text: msg?.text,
+        createdAt: msg?.createdAt,
       };
     });
     return chatMessages;
