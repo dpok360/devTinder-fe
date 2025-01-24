@@ -1,8 +1,13 @@
-const savePhotoUrlToStorage = (targetedUserphotoUrl) => {
-  if (!targetedUserphotoUrl) {
+const savePhotoUrlToStorage = (targetedUserphotoUrl, targetUserFirstName) => {
+  if (!targetedUserphotoUrl && !targetUserFirstName) {
     return;
   }
-  localStorage.setItem('targetUserPhotoUrl', targetedUserphotoUrl);
+  const targetUserDeatils = {
+    photoUrl: targetedUserphotoUrl,
+    userFirstName: targetUserFirstName,
+  };
+
+  localStorage.setItem('targetUserDetails', JSON.stringify(targetUserDeatils));
 };
 
 export default savePhotoUrlToStorage;

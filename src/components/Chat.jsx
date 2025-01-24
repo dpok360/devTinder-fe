@@ -35,9 +35,10 @@ const Chat = () => {
   const targetedUserphotoUrl = targetedUser?.photoUrl;
   const targetUserName = targetedUser?.firstName;
 
-  savePhotoUrlToStorage(targetedUserphotoUrl);
-  const photoUrlFromLoaclStorage =
-    readPhotoUrlFromStorage('targetUserPhotoUrl');
+  savePhotoUrlToStorage(targetedUserphotoUrl, targetUserName);
+  const targetUserFromLoaclStorage =
+    readPhotoUrlFromStorage('targetUserDetails');
+  const targetUserDetails = JSON.parse(targetUserFromLoaclStorage);
 
   useEffect(() => {
     const loadMessages = async () => {
@@ -113,7 +114,7 @@ const Chat = () => {
         <h1 className="p-4 text-md sm:text-2xl">Chat</h1>
         <div className="chat-image avatar flex items-center">
           <p className="text-md sm:text-xl font-serif text-white flex flex-col items-center">
-            {targetUserName}
+            {targetUserDetails.userFirstName}
             <span className="text-xs sm:text-sm px-2 font-sans">
               {isUserActive ? 'online' : 'offline'}
             </span>
@@ -122,7 +123,7 @@ const Chat = () => {
             <Online status={isUserActive ? 'online' : 'offline'} />
             <img
               alt="Tailwind CSS chat bubble component"
-              src={photoUrlFromLoaclStorage}
+              src={targetUserDetails.photoUrl}
             />
           </div>
         </div>
@@ -134,7 +135,7 @@ const Chat = () => {
             message={msg}
             user={user}
             profilePhoto={profilePhoto}
-            targetUserPhoto={photoUrlFromLoaclStorage}
+            targetUserPhoto={targetUserDetails.photoUrl}
             isOnline={isOnline}
           />
         ))}
