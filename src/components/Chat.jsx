@@ -23,6 +23,12 @@ const Chat = () => {
   const [isActive, setIsActive] = useState([]);
 
   const socketRef = useRef(null);
+  const messagesEndRef = useRef(null);
+
+  const scrollMessageView = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const targetedUser = connectedUsers.filter(
     (target) => target._id === targetUserId
   )[0];
@@ -84,6 +90,10 @@ const Chat = () => {
     };
   }, [userId, targetUserId]);
 
+  useEffect(() => {
+    scrollMessageView();
+  }, [messages]);
+
   const sendMessages = () => {
     if (!socketRef.current) return;
     socketRef.current.emit('sendMessage', {
@@ -96,8 +106,9 @@ const Chat = () => {
     setNewMessages('');
   };
   const isUserActive = !!isActive.find((id) => id === targetUserId);
+
   return (
-    <div className="w-screen sm:w-1/2 sm:m-auto sm:mt-6 border border-cyan-500 sm:rounded-xl h-[80vh] flex flex-col bg-gray-800">
+    <div className="w-screen sm:w-1/2 sm:m-auto sm:mt-6 border border-cyan-500  sm:rounded-xl h-[80vh] flex flex-col bg-gray-800">
       <div className="flex w-full border-b border-cyan-600 justify-between">
         <h1 className="p-4 text-md sm:text-2xl">Chat</h1>
         <div className="chat-image avatar flex items-center">
@@ -127,6 +138,7 @@ const Chat = () => {
             isOnline={isOnline}
           />
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div className="flex justify-center items-center mx-auto  p-2 gap-2 w-full ">
         <input
