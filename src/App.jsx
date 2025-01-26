@@ -10,13 +10,13 @@ import Requests from './components/Requests';
 import Premium from './components/Premium';
 import Chat from './components/Chat';
 import { ErrorBoundary } from 'react-error-boundary';
-import Error from './components/Error';
+import ErrorFallback from './components/ErrorFallback';
 import NotFound from './components/NotFound';
 
 function App() {
   return (
     <>
-      <ErrorBoundary fallback={<Error />}>
+      <ErrorBoundary fallback={<ErrorFallback />}>
         <Provider store={appStore}>
           <BrowserRouter basename="/">
             <Routes>

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const MessageInput = ({ newMessages, handleKeyDown, setNewMessages }) => {
   return (
     <input
@@ -11,6 +13,12 @@ const MessageInput = ({ newMessages, handleKeyDown, setNewMessages }) => {
       className="input input-bordered input-info w-full max-w-lg"
     />
   );
+};
+
+MessageInput.propTypes = {
+  newMessages: PropTypes.string,
+  handleKeyDown: PropTypes.func,
+  setNewMessages: PropTypes.func,
 };
 
 export default MessageInput;

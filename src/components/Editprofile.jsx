@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../constants/constants';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/slice/userSlice';
+import PropTypes from 'prop-types';
 
 const Editprofile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -164,6 +165,19 @@ const Editprofile = ({ user }) => {
       )}
     </>
   );
+};
+
+Editprofile.propTypes = {
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    gender: PropTypes.string.isRequired,
+    age: PropTypes.string.isRequired,
+    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    about: PropTypes.string.isRequired,
+    photoUrl: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Editprofile;

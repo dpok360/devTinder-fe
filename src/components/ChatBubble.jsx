@@ -1,6 +1,7 @@
 import { DEFAULT_USER_URL } from '../constants/constants';
 import { format } from 'date-fns';
 import ChekMark from './ChekMark';
+import PropTypes from 'prop-types';
 
 const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
   const name = message.firstName + ' ' + message.lastName;
@@ -46,6 +47,35 @@ const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
       </div>
     </>
   );
+};
+
+ChatBubble.propTypes = {
+  message: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+  }).isRequired,
+  user: PropTypes.shape(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      emailId: PropTypes.string.isRequired,
+      password: PropTypes.string.isRequired,
+      photoUrl: PropTypes.string.isRequired,
+      about: PropTypes.string.isRequired,
+      skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+      createdAt: PropTypes.string.isRequired,
+      updatedAt: PropTypes.string.isRequired,
+      __v: PropTypes.number.isRequired,
+      age: PropTypes.number.isRequired,
+      gender: PropTypes.string.isRequired,
+      isPremium: PropTypes.bool.isRequired,
+    }).isRequired
+  ),
+  profilePhoto: PropTypes.string.isRequired,
+  targetUserPhoto: PropTypes.string.isRequired,
 };
 
 export default ChatBubble;

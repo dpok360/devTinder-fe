@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const SuccessToast = ({ status }) => {
   return (
     <div className="toast toast-top toast-center">
@@ -6,6 +8,10 @@ const SuccessToast = ({ status }) => {
       </div>
     </div>
   );
+};
+
+SuccessToast.propTypes = {
+  status: PropTypes.string.isRequired,
 };
 
 export default SuccessToast;

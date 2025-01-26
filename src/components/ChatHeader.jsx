@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Online from './Online';
 
 const ChatHeader = ({ targetUserDetails, isUserActive }) => {
@@ -21,6 +22,14 @@ const ChatHeader = ({ targetUserDetails, isUserActive }) => {
       </div>
     </div>
   );
+};
+
+ChatHeader.propTypes = {
+  targetUserDetails: PropTypes.shape({
+    photoUrl: PropTypes.string.isRequired,
+    userFirstName: PropTypes.string.isRequired,
+  }).isRequired,
+  isUserActive: PropTypes.bool.isRequired,
 };
 
 export default ChatHeader;

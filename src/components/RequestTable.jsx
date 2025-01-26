@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { BASE_URL, DEFAULT_USER_URL } from '../constants/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeRequest } from '../utils/slice/requestSlice';
+import PropTypes from 'prop-types';
 
 const RequestTable = ({ requests, index }) => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const RequestTable = ({ requests, index }) => {
 
   const reviewRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         BASE_URL + '/request/review/' + status + '/' + _id,
         {},
         { withCredentials: true }
@@ -71,6 +72,24 @@ const RequestTable = ({ requests, index }) => {
       </tbody>
     </>
   );
+};
+
+RequestTable.propTypes = {
+  requests: PropTypes.arrayOf(
+    PropTypes.shape({
+      fromUserId: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        photoUrl: PropTypes.string.isRequired,
+        age: PropTypes.number.isRequired,
+        gender: PropTypes.oneOf(['male', 'female', 'other']).isRequired,
+        about: PropTypes.string,
+      }).isRequired,
+      status: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+    })
+  ),
+  index: PropTypes.number.isRequired,
 };
 
 export default RequestTable;

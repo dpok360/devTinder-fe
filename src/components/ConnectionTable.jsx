@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ConnectionTable = ({ user }) => {
@@ -39,6 +40,19 @@ const ConnectionTable = ({ user }) => {
       </tbody>
     </>
   );
+};
+
+ConnectionTable.propTypes = {
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    gender: PropTypes.string.isRequired,
+    age: PropTypes.string.isRequired,
+    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+    about: PropTypes.string.isRequired,
+    photoUrl: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default ConnectionTable;
