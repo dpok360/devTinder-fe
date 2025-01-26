@@ -1,5 +1,6 @@
 import { DEFAULT_USER_URL } from '../constants/constants';
 import { format } from 'date-fns';
+import ChekMark from './ChekMark';
 
 const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
   const name = message.firstName + ' ' + message.lastName;
@@ -39,7 +40,9 @@ const ChatBubble = ({ message, user, profilePhoto, targetUserPhoto }) => {
           </time>
         </div>
         <div className="chat-bubble">{message?.text}</div>
-        <div className="chat-footer opacity-50"></div>
+        <div className="chat-footer opacity-50">
+          <ChekMark />
+        </div>
       </div>
     </>
   );

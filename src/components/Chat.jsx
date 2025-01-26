@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import { createSocketConnection } from '../utils/socket';
 import { useSelector } from 'react-redux';
 import getJwt from '../utils/getjwt';
-import Online from './Online';
 import SendButton from './buttons/SendButton';
 import fetchChatMessages from '../utils/fetchChatMessages';
 import savePhotoUrlToStorage from '../utils/savePhotoUrlToStorage';
 import readPhotoUrlFromStorage from '../utils/readPhotoUrlFromStorage';
 import ChatHeader from './ChatHeader';
 import MessageInput from './MessageInput';
+import checkMessageSeen from '../utils/checkMessagSeen';
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -76,12 +76,14 @@ const Chat = () => {
     socket.on('userStatus', (onlineUsers) => {
       setIsActive(onlineUsers);
     });
+
     socket.on('messageReceived', ({ firstName, lastName, newMessages }) => {
       setMessages((messages) => [
         ...messages,
         { firstName, lastName, text: newMessages },
       ]);
     });
+
     socket.on('disconnect', () => {});
     return () => {
       socket.disconnect();
@@ -91,6 +93,16 @@ const Chat = () => {
   useEffect(() => {
     scrollMessageView();
   }, [messages]);
+
+  useEffect(() => {
+    checkMessageSeen(
+      messagesEndRef,
+      socketRef,
+      messages,
+      targetUserId,
+      targetUserName
+    );
+  }, [messages, targetUserId, targetUserName]);
 
   const sendMessages = () => {
     if (!socketRef.current) return;
