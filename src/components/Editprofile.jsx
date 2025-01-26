@@ -5,6 +5,8 @@ import { BASE_URL } from '../constants/constants';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/slice/userSlice';
 import PropTypes from 'prop-types';
+import Input from './Input';
+import Label from './Label';
 
 const Editprofile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
@@ -54,88 +56,41 @@ const Editprofile = ({ user }) => {
             <div className="card-body">
               <h2 className="card-title flex justify-center">Profile</h2>
               <div className="py-2">
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">First Name</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Last Name</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Age</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
+                <Label label="First Name" />
+                <Input
+                  type="text"
+                  value={firstName}
+                  setterFunc={setFirstName}
+                />
+                <Label label="Last Name" />
+                <Input type="text" value={lastName} setterFunc={setLastName} />
 
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Gender</span>
-                  </div>
-                  <select
-                    className="select select-bordered w-full max-w-xs"
-                    onChange={(e) => setGender(e.target.value)}
-                  >
-                    <option>male</option>
-                    <option>female</option>
-                    <option>others</option>
-                  </select>
-                </label>
+                <Label label="Age" />
+                <Input type="text" value={age} setterFunc={setAge} />
 
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Skills</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={skills}
-                    onChange={(e) => setSkills(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
+                <Label label="Gender" />
+                <select
+                  className="select select-bordered w-full max-w-xs"
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  <option>male</option>
+                  <option>female</option>
+                  <option>others</option>
+                </select>
 
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Photo URL</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={photoUrl}
-                    onChange={(e) => setPhotoUrl(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">About</span>
-                  </div>
-                  <textarea
-                    className="textarea textarea-bordered"
-                    placeholder="Bio"
-                    onChange={(e) => setAbout(e.target.value)}
-                  ></textarea>
-                </label>
+                <Label label="Skills" />
+                <Input type="text" value={skills} setterFunc={setSkills} />
+
+                <Label label="Photo url" />
+                <Input type="text" value={photoUrl} setterFunc={setPhotoUrl} />
+                <Label label="About" />
+                <textarea
+                  className="textarea textarea-bordered"
+                  placeholder="Bio"
+                  onChange={(e) => setAbout(e.target.value)}
+                ></textarea>
               </div>
+
               <div>
                 <p className="font-serif text-red-500 flex justify-center p-2">
                   {error}

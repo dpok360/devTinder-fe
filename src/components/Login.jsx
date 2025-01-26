@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/slice/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constants/constants';
+import Label from './Label';
+import Input from './Input';
 
 const Login = () => {
   const [firstName, setFirstName] = useState('');
@@ -58,53 +60,22 @@ const Login = () => {
           <div className="py-2">
             {!isLoginForm && (
               <>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">First Name</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs">
-                  <div className="label">
-                    <span className="label-text">Last Name</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label>
+                <Label label="First Name" />
+                <Input
+                  type="text"
+                  value={firstName}
+                  setterFunc={setFirstName}
+                />
+                <Label label="Last Name" />
+                <Input type="text" value={lastName} setterFunc={setLastName} />
               </>
             )}
 
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Email</span>
-              </div>
-              <input
-                type="text"
-                value={emailId}
-                onChange={(e) => setEmailId(e.target.value)}
-                className="input input-bordered w-full max-w-xs"
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Password</span>
-              </div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full max-w-xs"
-              />
-            </label>
+            <Label label="Email" />
+            <Input type="email" value={emailId} setterFunc={setEmailId} />
+
+            <Label label="Password" />
+            <Input type="password" value={password} setterFunc={setPassword} />
           </div>
           <div>
             <p className="font-serif text-red-500 flex justify-center p-2">
