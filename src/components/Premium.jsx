@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants/constants';
 import { useEffect, useState } from 'react';
+import List from './List';
+import BuyButton from './buttons/BuyButton';
 
 const Premium = () => {
   const [isUserPremium, setIsUserPremium] = useState(false);
@@ -45,8 +47,6 @@ const Premium = () => {
       },
     };
 
-    //should open razorpay dialog box
-
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
@@ -61,31 +61,14 @@ const Premium = () => {
             Silver Membership
           </h1>
           <ul className="font-extralight p-2 m-2 ">
-            <li className="flex gap-1">
-              <span>
-                <img src="../../public/svgs/tick.svg" alt="tick" />
-              </span>
-              Chat with other people
-            </li>
-            <li className="flex gap-1">
-              <span>
-                <img src="../../public/svgs/tick.svg" alt="tick" />
-              </span>
-              100 connection per days
-            </li>
-            <li className="flex gap-1">
-              <span>
-                <img src="../../public/svgs/tick.svg" alt="tick" />
-              </span>
-              Blue tick for 3 months
-            </li>
+            <List label="Chat with other people" />
+            <List label="100 connection per days" />
+            <List label=" Blue tick for 3 months" />
           </ul>
-          <button
-            onClick={() => handleBuyClick('silver')}
-            className="btn btn-outline p-2 m-2"
-          >
-            By Silver
-          </button>
+          <BuyButton
+            label="Buy Silver"
+            handleBuyClick={() => handleBuyClick('silver')}
+          />
         </div>
         <div className="divider divider-horizontal">OR</div>
 
@@ -94,31 +77,14 @@ const Premium = () => {
             Gold Membership
           </h1>
           <ul className="font-extralight p-2 m-2 ">
-            <li className="flex gap-1">
-              <span>
-                <img src="../../public/svgs/tick.svg" alt="tick" />
-              </span>
-              Chat with other people
-            </li>
-            <li className="flex gap-1">
-              <span>
-                <img src="../../public/svgs/tick.svg" alt="tick" />
-              </span>
-              Infinite connection per days
-            </li>
-            <li className="flex gap-1">
-              <span>
-                <img src="../../public/svgs/tick.svg" alt="tick" />
-              </span>
-              Blue tick
-            </li>
+            <List label="Chat with other people" />
+            <List label="Infinite connection per days" />
+            <List label="Blue tick" />
           </ul>
-          <button
-            onClick={() => handleBuyClick('gold')}
-            className="btn btn-outline btn-warning p-2 m-2"
-          >
-            By Gold
-          </button>
+          <BuyButton
+            label="Buy Gold"
+            handleBuyClick={() => handleBuyClick('gold')}
+          />
         </div>
       </div>
     </div>
