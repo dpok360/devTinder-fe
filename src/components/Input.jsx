@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { InputPorpTypes } from '../proptypes/propTypes';
 
 const Input = ({ type, value, setterFunc }) => {
   return (
@@ -11,10 +11,6 @@ const Input = ({ type, value, setterFunc }) => {
   );
 };
 
-Input.propTypes = {
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  setterFunc: PropTypes.func.isRequired,
-};
+Input.propTypes = InputPorpTypes;
 
 export default Input;

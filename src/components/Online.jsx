@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
+import { OnlinePropTypes } from '../proptypes/propTypes';
 
 const Online = ({ status }) => {
-  console.log(status);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +21,5 @@ const Online = ({ status }) => {
     </svg>
   );
 };
-Online.propTypes = {
-  status: PropTypes.string.isRequired,
-};
+Online.propTypes = OnlinePropTypes;
 export default Online;

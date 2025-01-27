@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { SuccessToastPropTypes } from '../proptypes/propTypes';
 
 const SuccessToast = ({ status }) => {
   return (
@@ -10,8 +10,6 @@ const SuccessToast = ({ status }) => {
   );
 };
 
-SuccessToast.propTypes = {
-  status: PropTypes.string.isRequired,
-};
+SuccessToast.propTypes = SuccessToastPropTypes;
 
 export default SuccessToast;

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { LabelPropTypes } from '../proptypes/propTypes';
 
 const Label = ({ label }) => {
   return (
@@ -10,8 +10,6 @@ const Label = ({ label }) => {
   );
 };
 
-Label.propTypes = {
-  label: PropTypes.string.isRequired,
-};
+Label.propTypes = LabelPropTypes;
 
 export default Label;

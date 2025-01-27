@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { ErrorFallBackPropTypes } from '../proptypes/propTypes';
 
 const ErrorFallback = ({ error }) => {
   return (
@@ -8,8 +8,6 @@ const ErrorFallback = ({ error }) => {
   );
 };
 
-ErrorFallback.propTypes = {
-  error: PropTypes.instanceOf(Error),
-};
+ErrorFallback.propTypes = ErrorFallBackPropTypes;
 
 export default ErrorFallback;

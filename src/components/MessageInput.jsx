@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { MessageInputPropTypes } from '../proptypes/propTypes';
 
 const MessageInput = ({ newMessages, handleKeyDown, setNewMessages }) => {
   return (
@@ -15,10 +15,6 @@ const MessageInput = ({ newMessages, handleKeyDown, setNewMessages }) => {
   );
 };
 
-MessageInput.propTypes = {
-  newMessages: PropTypes.string,
-  handleKeyDown: PropTypes.func,
-  setNewMessages: PropTypes.func,
-};
+MessageInput.propTypes = MessageInputPropTypes;
 
 export default MessageInput;

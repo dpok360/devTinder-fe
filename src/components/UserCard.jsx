@@ -2,7 +2,7 @@ import axios from 'axios';
 import { BASE_URL, DEFAULT_USER_URL } from '../constants/constants';
 import { useDispatch } from 'react-redux';
 import { removeUserFromFeed } from '../utils/slice/feedSlice';
-import PropTypes from 'prop-types';
+import { UserCardPropTypes } from '../proptypes/propTypes';
 
 const UserCard = ({ user }) => {
   const dispatch = useDispatch();
@@ -58,17 +58,6 @@ const UserCard = ({ user }) => {
   );
 };
 
-UserCard.propTypes = {
-  user: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    age: PropTypes.number,
-    photoUrl: PropTypes.string,
-    about: PropTypes.string,
-    gender: PropTypes.string,
-    skills: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
-};
+UserCard.propTypes = UserCardPropTypes;
 
 export default UserCard;

@@ -66,7 +66,7 @@ const Chat = () => {
     const socket = createSocketConnection();
     socketRef.current = socket;
     socket.emit('joinChat', {
-      firstName: user.firstName,
+      firstName: user?.firstName,
       userId,
       targetUserId,
       token,
@@ -137,6 +137,7 @@ const Chat = () => {
             user={user}
             profilePhoto={profilePhoto}
             targetUserPhoto={targetUserDetails.photoUrl}
+            lastIndex={index === messages.length - 1}
           />
         ))}
         <div ref={messagesEndRef} />

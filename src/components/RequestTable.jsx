@@ -2,7 +2,7 @@ import axios from 'axios';
 import { BASE_URL, DEFAULT_USER_URL } from '../constants/constants';
 import { useDispatch } from 'react-redux';
 import { removeRequest } from '../utils/slice/requestSlice';
-import PropTypes from 'prop-types';
+import { RequestTablePropTypes } from '../proptypes/propTypes';
 
 const RequestTable = ({ requests, index }) => {
   const dispatch = useDispatch();
@@ -74,22 +74,6 @@ const RequestTable = ({ requests, index }) => {
   );
 };
 
-RequestTable.propTypes = {
-  requests: PropTypes.arrayOf(
-    PropTypes.shape({
-      fromUserId: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        photoUrl: PropTypes.string.isRequired,
-        age: PropTypes.number.isRequired,
-        gender: PropTypes.oneOf(['male', 'female', 'other']).isRequired,
-        about: PropTypes.string,
-      }).isRequired,
-      status: PropTypes.string.isRequired,
-      _id: PropTypes.string.isRequired,
-    })
-  ),
-  index: PropTypes.number.isRequired,
-};
+RequestTable.propTypes = RequestTablePropTypes;
 
 export default RequestTable;
