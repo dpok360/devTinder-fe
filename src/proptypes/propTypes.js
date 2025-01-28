@@ -40,14 +40,14 @@ export const ChatHeaderPropTypes = {
 
 export const ConnectionTablePropTypes = {
   user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.string,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-    age: PropTypes.string.isRequired,
-    skills: PropTypes.arrayOf(PropTypes.string).isRequired,
-    about: PropTypes.string.isRequired,
-    photoUrl: PropTypes.number.isRequired,
+    gender: PropTypes.string,
+    age: PropTypes.number,
+    skills: PropTypes.arrayOf(PropTypes.string),
+    about: PropTypes.string,
+    photoUrl: PropTypes.string,
   }).isRequired,
 };
 
@@ -103,4 +103,20 @@ export const RequestTablePropTypes = {
 
 export const SuccessToastPropTypes = {
   status: PropTypes.string.isRequired,
+};
+
+export const ReviewRequestPropTypes = {
+  label: PropTypes.string.isRequired,
+  reviewRequest: PropTypes.func.isRequired,
+};
+
+export const BuyButtonPropTypes = {
+  label: ReviewRequestPropTypes.label,
+  handleBuyClick: ReviewRequestPropTypes.reviewRequest,
+  type: PropTypes.string.isRequired,
+};
+
+export const SendrequestButtonPropTypes = {
+  label: ReviewRequestPropTypes.label,
+  handleSendRequest: ReviewRequestPropTypes.reviewRequest,
 };

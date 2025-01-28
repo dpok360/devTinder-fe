@@ -3,6 +3,7 @@ import { BASE_URL, DEFAULT_USER_URL } from '../constants/constants';
 import { useDispatch } from 'react-redux';
 import { removeRequest } from '../utils/slice/requestSlice';
 import { RequestTablePropTypes } from '../proptypes/propTypes';
+import ReviewButton from './buttons/ReviewButton';
 
 const RequestTable = ({ requests, index }) => {
   const dispatch = useDispatch();
@@ -27,11 +28,6 @@ const RequestTable = ({ requests, index }) => {
     <>
       <tbody>
         <tr>
-          {/* <th>
-      <label>
-      <input type="checkbox" className="checkbox" />
-      </label>
-      </th> */}
           <td>
             <div className="flex items-center gap-4">
               <div className="avatar">
@@ -55,18 +51,14 @@ const RequestTable = ({ requests, index }) => {
             <div className="badge badge-primary">{status}</div>
           </td>
           <th>
-            <button
-              className="btn btn-success btn-sm mx-1"
-              onClick={() => reviewRequest('accepted', _id)}
-            >
-              Accept
-            </button>
-            <button
-              className="btn btn-error btn-sm mx-1"
-              onClick={() => reviewRequest('rejected', _id)}
-            >
-              Decline
-            </button>
+            <ReviewButton
+              label="Accept"
+              reviewRequest={() => reviewRequest('accepted', _id)}
+            />
+            <ReviewButton
+              label="Decline"
+              reviewRequest={() => reviewRequest('rejected', _id)}
+            />
           </th>
         </tr>
       </tbody>

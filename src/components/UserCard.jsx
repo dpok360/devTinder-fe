@@ -3,9 +3,13 @@ import { BASE_URL, DEFAULT_USER_URL } from '../constants/constants';
 import { useDispatch } from 'react-redux';
 import { removeUserFromFeed } from '../utils/slice/feedSlice';
 import { UserCardPropTypes } from '../proptypes/propTypes';
+import { useLocation } from 'react-router-dom';
+import SendrequestButton from './buttons/SendrequestButton';
 
 const UserCard = ({ user }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const isProfilePage = location.pathname === '/profile';
   const { firstName, lastName, age, photoUrl, about, gender, skills, _id } =
     user;
 
@@ -34,25 +38,18 @@ const UserCard = ({ user }) => {
         {age && gender && <p>{age + ',' + gender}</p>}
         <p className="font-sans">{about}</p>
         <p className="font-sans">{skills}</p>
-        <div className="card-actions justify-center my-4">
-          <button
-            className="btn btn-outline btn-error"
-            onClick={() => {
-              handleSendRequest('ignored', _id);
-            }}
-          >
-            Ignore
-          </button>
-
-          <button
-            className="btn btn-outline btn-success"
-            onClick={() => {
-              handleSendRequest('interested', _id);
-            }}
-          >
-            Interested
-          </button>
-        </div>
+        {!isProfilePage && (
+          <div className="card-actions justify-center my-4">
+            <SendrequestButton
+              label="Ignore"
+              handleSendRequest={() => handleSendRequest('ignored', _id)}
+            />
+            <SendrequestButton
+              label="Accept"
+              handleSendRequest={() => handleSendRequest('interested', _id)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

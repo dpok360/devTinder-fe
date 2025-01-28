@@ -1,12 +1,18 @@
-const BuyButton = ({ label, handleBuyClick }) => {
+import { BuyButtonPropTypes } from '../../proptypes/propTypes';
+
+const BuyButton = ({ type, label, handleBuyClick }) => {
+  const isGoldType = type === 'gold' ? 'btn-warning' : 'btn-ghost';
+
   return (
     <button
-      onClick={() => handleBuyClick('gold')}
-      className="btn btn-outline btn-warning p-2 m-2"
+      onClick={handleBuyClick}
+      className={`btn btn-outline ${isGoldType} p-2 m-2`}
     >
       {label}
     </button>
   );
 };
+
+BuyButton.propTypes = BuyButtonPropTypes;
 
 export default BuyButton;

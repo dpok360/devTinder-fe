@@ -66,6 +66,7 @@ const Premium = () => {
             <List label=" Blue tick for 3 months" />
           </ul>
           <BuyButton
+            type="silver"
             label="Buy Silver"
             handleBuyClick={() => handleBuyClick('silver')}
           />
@@ -82,6 +83,7 @@ const Premium = () => {
             <List label="Blue tick" />
           </ul>
           <BuyButton
+            type="gold"
             label="Buy Gold"
             handleBuyClick={() => handleBuyClick('gold')}
           />

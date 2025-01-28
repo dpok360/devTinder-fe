@@ -64,10 +64,8 @@ const Editprofile = ({ user }) => {
                 />
                 <Label label="Last Name" />
                 <Input type="text" value={lastName} setterFunc={setLastName} />
-
                 <Label label="Age" />
-                <Input type="text" value={age} setterFunc={setAge} />
-
+                <Input type="text" value={String(age)} setterFunc={setAge} />
                 <Label label="Gender" />
                 <select
                   className="select select-bordered w-full max-w-xs"
@@ -79,7 +77,13 @@ const Editprofile = ({ user }) => {
                 </select>
 
                 <Label label="Skills" />
-                <Input type="text" value={skills} setterFunc={setSkills} />
+
+                <Input
+                  type="text"
+                  value={skills.join(',')}
+                  //setterFunc={setSkills}
+                  setterFunc={(newValue) => setSkills(newValue.split(','))}
+                />
 
                 <Label label="Photo url" />
                 <Input type="text" value={photoUrl} setterFunc={setPhotoUrl} />
@@ -108,7 +112,15 @@ const Editprofile = ({ user }) => {
           </div>
         </div>
         <UserCard
-          user={{ firstName, lastName, age, gender, photoUrl, skills, about }}
+          user={{
+            firstName,
+            lastName,
+            age,
+            gender,
+            photoUrl,
+            skills,
+            about,
+          }}
         />
       </div>
       {showToast && (
