@@ -1,3 +1,5 @@
+import { SendButtonPropType } from '../../proptypes/propTypes';
+
 const SendButton = ({ sendMessages }) => {
   return (
     <button
@@ -10,4 +12,5 @@ const SendButton = ({ sendMessages }) => {
   );
 };
 
+SendButton.propTypes = SendButtonPropType;
 export default SendButton;

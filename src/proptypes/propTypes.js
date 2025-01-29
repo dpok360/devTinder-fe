@@ -120,3 +120,4 @@ export const SendrequestButtonPropTypes = {
   label: ReviewRequestPropTypes.label,
   handleSendRequest: ReviewRequestPropTypes.reviewRequest,
 };
+export const SendButtonPropType = { sendMessages: PropTypes.func };
