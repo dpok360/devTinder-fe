@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import BuyButton from '../components/buttons/BuyButton';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('Buy Button component', () => {
   it("Should render Buy Gold when label='Buy Gold'", () => {
@@ -31,5 +31,23 @@ describe('Buy Button component', () => {
     );
     const button = screen.getByText('Buy Silver');
     expect(button).toHaveClass('btn-ghost');
+  });
+
+  it('Should trigger handleBuyClick when button is clicked', () => {
+    const handleBuyClick = vi.fn();
+
+    render(
+      <BuyButton
+        type="gold"
+        label="Buy Gold"
+        handleBuyClick={() => handleBuyClick('gold')}
+      />
+    );
+
+    const button = screen.getByText('Buy Gold');
+    fireEvent.click(button);
+
+    expect(handleBuyClick).toHaveBeenCalledWith('gold');
+    expect(handleBuyClick).toHaveBeenCalledTimes(1);
   });
 });
