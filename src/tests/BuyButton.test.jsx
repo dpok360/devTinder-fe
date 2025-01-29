@@ -33,7 +33,7 @@ describe('Buy Button component', () => {
     expect(button).toHaveClass('btn-ghost');
   });
 
-  it('Should trigger handleBuyClick when button is clicked', () => {
+  it("Should trigger handleBuyClick when button 'Buy Gold' is clicked", () => {
     const handleBuyClick = vi.fn();
 
     render(
@@ -48,6 +48,24 @@ describe('Buy Button component', () => {
     fireEvent.click(button);
 
     expect(handleBuyClick).toHaveBeenCalledWith('gold');
+    expect(handleBuyClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('Should trigger handleBuyClick when button is clicked', () => {
+    const handleBuyClick = vi.fn();
+
+    render(
+      <BuyButton
+        type="silver"
+        label="Buy Silver"
+        handleBuyClick={() => handleBuyClick('silver')}
+      />
+    );
+
+    const button = screen.getByText('Buy Silver');
+    fireEvent.click(button);
+
+    expect(handleBuyClick).toHaveBeenCalledWith('silver');
     expect(handleBuyClick).toHaveBeenCalledTimes(1);
   });
 });

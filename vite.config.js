@@ -8,6 +8,10 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './setupTests.js',
     include: ['src/tests/**/*.test.{js,jsx,ts,tsx}'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+    },
   },
   server: {
     host: 'localhost',
